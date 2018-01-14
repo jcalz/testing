@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <title>Senior Property Tax Deferral Eligibility</title>
+    <style>
+      .yesno .btn-secondary:not([disabled]):not(.disabled).active.yes {
+      background-color: #007f00;
+      }
+      .yesno .btn-secondary:not([disabled]):not(.disabled).active.no {
+      background-color: #bf0000;
+      }
+    </style>
+  </head>
+  <body>
+    <main role="main">
+      <div class="jumbotron">
+        <div class="container">
+          <h1 class="display-3">Senior Property Tax Deferral:</h1>
+          <p>If you are a <b>homeowner, age 65 and older</b> whose yearly income is <b>less than $57,000</b>, there is a program which may allow you to <b>defer payment of your property taxes</b> with a 3% interest rate until you sell your home or pass away.  This deferral would place a lien on your property and requires payment of the deferred taxes and accrued interest upon sale of your home or at your passing, but could help you... TODO</p>
+        </div>
+      </div>
+      <div class="container">
+        <h2>Are you eligible?</h2>
+        <p>Take the brief survey below to find out if you may be eligible to take advantage of this program.</p>
+        <form id="eligibility-form">
+          <div class="form-group row yesno">
+            <label for="q0" class="col-sm-5 col-form-label text-sm-right">Do you live in <b>Somerville, Massachusetts?</b></label>	
+            <div class="col-sm-2 btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-secondary yes"><input type="radio" name="q0" value="yes" autocomplete="off">Yes</label>
+              <label class="btn btn-secondary no"><input type="radio" name="q0" value="no" autocomplete="off">No</label>
+            </div>
+          </div>
+          <div class="form-group row yesno">
+            <label for="q1" class="col-sm-5 col-form-label text-sm-right">Were you born on or before <b>July 1, 1952</b>?</label>	
+            <div class="col-sm-2 btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-secondary yes"><input type="radio" name="q1" value="yes" autocomplete="off">Yes</label>
+              <label class="btn btn-secondary no"><input type="radio" name="q1" value="no" autocomplete="off">No</label>
+            </div>
+          </div>
+          <div class="form-group row yesno">
+            <label for="q2" class="col-sm-5 col-form-label text-sm-right">Do you <b>own your home</b>?</label>	
+            <div class="col-sm-2 btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-secondary yes"><input type="radio" name="q2" value="yes" autocomplete="off">Yes</label>
+              <label class="btn btn-secondary no"><input type="radio" name="q2" value="no" autocomplete="off">No</label>
+            </div>
+          </div>
+          <div class="form-group row yesno">
+            <label for="q3" class="col-sm-5 col-form-label text-sm-right">Have you lived in your home for <b>at least 5 years</b>?</label>	
+            <div class="col-sm-2 btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-secondary yes"><input type="radio" name="q3" value="yes" autocomplete="off">Yes</label>
+              <label class="btn btn-secondary no"><input type="radio" name="q3" value="no" autocomplete="off">No</label>
+            </div>
+          </div>
+          <div class="form-group row yesno">
+            <label for="q4" class="col-sm-5 col-form-label text-sm-right">Is your yearly income <b>less than $57,000</b>?</label>	
+            <div class="col-sm-2 btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-secondary yes"><input type="radio" name="q4" value="yes" autocomplete="off">Yes</label>
+              <label class="btn btn-secondary no"><input type="radio" name="q4" value="no" autocomplete="off">No</label>
+            </div>
+          </div>
+        </form>
+        <div class="alert alert-secondary eligibility-result unknown">
+          <h4 class="alert-heading">Answer the questions</h4>
+          <p>Please answer the questions above to find out if you may be eligible.</p>
+        </div>
+        <div class="alert alert-danger eligibility-result ineligible">
+          <h4 class="alert-heading">Sorry, you are not eligible.</h4>
+          <p>Unfortunately, this property tax deferral program is not available to you.</p>
+          <p>TODO: tell these people where to go for other ideas?</p>
+        </div>
+        <div class="alert alert-success eligibility-result eligible">
+          <h4 class="alert-heading">Good news!  You may be eligible!</h4>
+          You may indeed be eligible to take advantage of this deferral program.
+          <hr>
+          Next steps: 
+          <ul>
+            <li>Learn more (tbd) about the program
+            <li>go to XXXX to take the next steps to apply for this deferral.  The deadline for filing is Monday, April 2, 2018</li>
+            <li>Use a tool (tbd) to estimate how the program would affect your budget</li>
+          </ul>
+        </div>
+      </div>
+      </div>
+    </main>
+    <footer class="container">
+      <p>&copy; SomervilleTogether 2018</p>
+    </footer>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+    <script>
+      // return true, false, or undefined
+      function isEligible() {
+        var buttons = $('#eligibility-form .yesno');
+        if (buttons.find('input[type=radio][value=no]:checked').length !== 0)
+          return false;
+        if (buttons.length > buttons.find('input[type=radio]:checked').length)
+          return void 0;
+        return true;
+      }
+
+      function showEligible() {
+        var eligible = isEligible();
+        $('.eligibility-result.unknown').toggle(typeof eligible == 'undefined');
+        $('.eligibility-result.eligible').toggle(eligible == true);
+        if (eligible == true) {
+          $('.eligibility-result.eligible').focus();
+        }
+        $('.eligibility-result.ineligible').toggle(eligible == false);
+      }
+      showEligible();
+      $('#eligibility-form input').change(showEligible);    </script>
+  </body>
+</html>
