@@ -81,10 +81,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
     <script>
       function drawTable() {
-        var initialHomeValue = +($('#home-value').val());
-        var annualAppreciationRate = (+($('#appreciation-rate').val())) / 100;
-        var annualTaxRate = (+($('#tax-rate').val())) / 100;
-        var annualInterestRate = (+($('#interest-rate').val())) / 100;
+        var initialHomeValue = +($('#home-value').val().replace(/, /g,''));
+        var annualAppreciationRate = (+($('#appreciation-rate').val().replace(/, /g,''))) / 100;
+        var annualTaxRate = (+($('#tax-rate').val().replace(/, /g,''))) / 100;
+        var annualInterestRate = (+($('#interest-rate').val().replace(/, /g,''))) / 100;
         var budget = calculateBudget(initialHomeValue, annualAppreciationRate, annualTaxRate, annualInterestRate);
         var bodyDiv = $('#budget-results tbody');
         bodyDiv.empty();
