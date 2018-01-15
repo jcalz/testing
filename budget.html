@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <title>Senior Property Tax Deferral Budget Tool</title>
+    <style>
+    </style>
+  </head>
+  <body>
+    <main role="main">
+      <div class="jumbotron">
+        <div class="container">
+          <h1 class="display-3">Senior Property Tax Deferral:</h1>
+          <p>If you are a <b>homeowner, age 65 and older</b> whose yearly income is <b>less than $57,000</b>, there is a program which may allow you to <b>defer payment of your property taxes</b> with a 3% interest rate until you sell your home or pass away.  This deferral would place a lien on your property and requires payment of the deferred taxes and accrued interest upon sale of your home or at your passing, but could help you... TODO</p>
+        </div>
+      </div>
+      <div class="container">
+        <h2>Budgeting Tool</h2>
+        <p>Enter some stuff</p>
+        <form id="budget-form">
+          <div class="form-group row">
+            <label for="home-value" class="col-sm-4 col-form-label text-sm-right">Current value of home:</label>	
+            <div class="col-sm-3 form-inline">
+              <div class="input-group">
+                <span class="col-form-label">$</span><input id="home-value" type="number" class="form-control" min="0" step="100" value="700000">
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="appreciation-rate" class="col-sm-4 col-form-label text-sm-right">Annual home value appreciation rate:</label>	
+            <div class="col-sm-3 form-inline">
+              <div class="input-group">
+                <input id="appreciation-rate" type="number" class="form-control" min="0" step="0.1" value="10"><span class="col-form-label">%</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="tax-rate" class="col-sm-4 col-form-label text-sm-right">Annual tax rate:</label>	
+            <div class="col-sm-3 form-inline">
+              <div class="input-group">
+                <input id="tax-rate" type="number" class="form-control" min="0" step="0.1" value="2"><span class="col-form-label">%</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="interest-rate" class="col-sm-4 col-form-label text-sm-right">Annual loan interest rate:</label>	
+            <div class="col-sm-3 form-inline">
+              <div class="input-group">
+                <input id="interest-rate" type="number" class="form-control" min="0" step="0.1" value="3"><span class="col-form-label">%</span>
+              </div>
+            </div>
+          </div>
+          <table id="budget-results" class="table text-right">
+            <thead>
+              <tr>
+                <th scope="col">Year</th>
+                <th scope="col">Home Value</th>
+                <th scope="col">Yearly taxes</th>
+                <th scope="col">Yearly interest</th>
+                <th scope="col">Accrued taxes</th>
+                <th scope="col">Accrued interest</th>
+                <th scope="col">Accrued taxes and interest</th>
+                <th scope="col">Payout if sold</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </form>
+      </div>
+    </main>
+    <footer class="container">
+      <p>&copy; SomervilleTogether 2018</p>
+    </footer>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+    <script>
+      function drawTable() {
+        var initialHomeValue = +($('#home-value').val());
+        var annualAppreciationRate = (+($('#appreciation-rate').val())) / 100;
+        var annualTaxRate = (+($('#tax-rate').val())) / 100;
+        var annualInterestRate = (+($('#interest-rate').val())) / 100;
+        var budget = calculateBudget(initialHomeValue, annualAppreciationRate, annualTaxRate, annualInterestRate);
+        var bodyDiv = $('#budget-results tbody');
+        bodyDiv.empty();
+        var c = {
+          style: 'currency',
+          currency: 'USD',
+          useGrouping: true,
+          maximumFractionDigits: 0,
+          minimumFractionDigits: 0
+        };
+        for (var i = 0; i < budget.length; i++) {
+          var budgetYear = budget[i];
+          var row = $('<tr>');
+          row.append($('<th scope="row">').text(budgetYear.year));
+          row.append($('<td>').text(budgetYear.homeValue.toLocaleString('en-us', c)));
+          row.append($('<td>').text(budgetYear.taxesDeferred.toLocaleString('en-us', c)));
+          row.append($('<td>').text(budgetYear.interest.toLocaleString('en-us', c)));
+          row.append($('<td>').text(budgetYear.accruedTaxes.toLocaleString('en-us', c)));
+          row.append($('<td>').text(budgetYear.accruedInterest.toLocaleString('en-us', c)));
+          row.append($('<td>').text(budgetYear.accruedTaxesAndInterest.toLocaleString('en-us', c)));
+          row.append($('<td>').text(budgetYear.payoutIfSold.toLocaleString('en-us', c)));
+          bodyDiv.append(row);
+        }
+      }
+      drawTable();
+      $('#budget-form input').change(drawTable);
+
+      function calculateBudget(initialHomeValue, annualAppreciationRate, annualTaxRate, annualInterestRate) {
+        var homeValue = initialHomeValue;
+        var accruedTaxes = 0;
+        var accruedInterest = 0;
+        var accruedTaxesAndInterest = 0;
+        var ret = [];
+        for (var year = 0; year < 20; year++) {
+          var taxesDeferred = homeValue * annualTaxRate;
+          var interest = accruedTaxesAndInterest * annualInterestRate;
+          accruedTaxes += taxesDeferred;
+          accruedInterest += interest;
+          accruedTaxesAndInterest = accruedTaxes + accruedInterest;
+          ret.push({
+            year: year,
+            homeValue: homeValue,
+            taxesDeferred: taxesDeferred,
+            interest: interest,
+            accruedTaxes: accruedTaxes,
+            accruedInterest: accruedInterest,
+            accruedTaxesAndInterest: accruedTaxesAndInterest,
+            payoutIfSold: homeValue - accruedTaxesAndInterest
+          })
+          homeValue += homeValue * annualAppreciationRate;
+        }
+        return ret;
+      }
+	  </script>
+  </body>
+</html>
